@@ -52,7 +52,7 @@ public static class UI_InputSystem
         return Vector2.zero;
     }
 
-    public static Vector2 PlayerMovementDirectio => JoyStickProcessor("movementJoystick");
+    public static Vector2 PlayerMovementDirection => JoyStickProcessor("movementJoystick");
 
     public static float Camera_X_Movement => JoyStickProcessor("cameraJoystick").x;
 

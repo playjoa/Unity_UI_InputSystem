@@ -98,8 +98,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 PlayerMovementDirection()
     {
-        Vector3 baseDirection = playerTransform.right * UI_InputSystem.PlayerMovementDirectio.x +
-                                playerTransform.forward * UI_InputSystem.PlayerMovementDirectio.y;
+        Vector3 baseDirection = playerTransform.right * UI_InputSystem.PlayerMovementDirection.x +
+                                playerTransform.forward * UI_InputSystem.PlayerMovementDirection.y;
 
         baseDirection *= playerHorizontalSpeed * Time.deltaTime;
 
