@@ -6,7 +6,7 @@ Buttons and Joystick UI input system with a FPS Example
 Developed in Unity <strong>2020.3.7f1</strong> <br>
 Didn't test this with older Unity versions, but it should work fine! <br>
 
-Uses the FREE asset <a href='https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631'> Joystick Pack </a> from the asset store for the joysticks! Asset made by <a href='https://assetstore.unity.com/publishers/32730'> Fenerax Studios </a>! <br>
+Uses the FREE asset <a href='https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631'> Joystick Pack </a> from the asset store for the joysticks! Asset made by <a href='https://assetstore.unity.com/publishers/32730'> Fenerax Studios</a>! <br>
 
 # SetUp
 ## Button
