@@ -65,4 +65,4 @@ public static bool TouchInput => ButtonPressProcessor("touchTrigger");
 
 ## FPS Example
 ![1](Screenshots/Demo.png)
-- Comes with a  <a href='https://github.com/playjoa/Unity_SimpleCharacterController_FPS'> simple character controller </a> </strong> adapted to use with this UI input system.
+- Comes with <strong> <a href='https://github.com/playjoa/Unity_SimpleCharacterController_FPS'> simple character controller </a> </strong> adapted to use with this UI input system.
