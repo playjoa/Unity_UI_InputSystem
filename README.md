@@ -10,7 +10,7 @@ Uses the FREE asset <a href='https://assetstore.unity.com/packages/tools/input-m
 
 # SetUp
 
-## Create You Actions
+## 1. Create You Actions
 * Add your desired actions in InputEnums.cs
 
 ```C#
@@ -33,21 +33,21 @@ namespace UI_Inputs.Enums
 }
 ```
 
-## Button
+## 2. Button setup
 * Assign "UI_InputButton.cs" to a UI element with an image (clickable area)! <br>
 * Choose the desired action for the button created from the InputEnums! Example: Jump, Run, Shoot... <br>
 
 ![1](Screenshots/SetUpButton.png) <br>
 <strong> Obs: </strong> Compatible with: "Click Trigger", "Touch Trigger", "Hold Trigger" and "After Click Trigger"
 
-## Joysticks
+## 3. Joystick setup
 * Assign "UI_InputJoystick.cs" to a Joystick from the asset pack (can be any type of joystick [Fixed, Floating etc...]) <br>
 * Choose the desired Joystick Action for the Joystick created from the InputEnums! Example: joystickCamera, joystickPlayerMovement... <br>
 
 ![1](Screenshots/SetUpJoystick.png)
 
 
-## Create Inputs
+## 4. Create your inputs
 * Add your commands along with the Actions in "UI_InputSystem.cs" (bool and Vector2 ready)
 
 ```C#
@@ -68,7 +68,7 @@ public static bool HoldClickInput => ButtonPressProcessor(ButtonAction.Action3);
 public static bool TouchInput => ButtonPressProcessor(ButtonAction.Action4);
 ```
 
-## Using Inputs
+## 5. Using Inputs
 * Call "UI_InputSystem" on your desired controllers and done!
 * The class is static so no need to add to your scene and use Singleton
 
