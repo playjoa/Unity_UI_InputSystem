@@ -83,7 +83,6 @@ Vector3 PlayerMovementDirection()
 
     baseDirection *= playerHorizontalSpeed * Time.deltaTime;
     return baseDirection;
-    }
 }
 ```
 <strong> Obs: </strong> This code is located in "PlayerMovement.cs"
