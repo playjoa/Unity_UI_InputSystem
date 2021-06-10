@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UI_Inputs;
+using UI_Inputs.Enums;
 
 public static class UI_InputSystem
 {
-    private static Dictionary<string, UI_InputJoystick> UI_JoySticks;
-    private static Dictionary<string, UI_InputButton> UI_Buttons;
+    private static Dictionary<ButtonAction, UI_InputButton> UI_Buttons;
+    private static Dictionary<JoyStickAction, UI_InputJoystick> UI_JoySticks;
 
     #region Initialize Area
     static void PrepareValues()
@@ -32,7 +33,7 @@ public static class UI_InputSystem
     #endregion
 
     #region Inputs Area
-    static bool ButtonPressProcessor(string buttonToCheckPress)
+    static bool ButtonPressProcessor(ButtonAction buttonToCheckPress)
     {
         PrepareValues();
 
@@ -42,7 +43,7 @@ public static class UI_InputSystem
         return false;
     }
 
-    static Vector2 JoyStickProcessor(string joyStickToCheckPress)
+    static Vector2 JoyStickProcessor(JoyStickAction joyStickToCheckPress)
     {
         PrepareValues();
 
@@ -52,20 +53,20 @@ public static class UI_InputSystem
         return Vector2.zero;
     }
 
-    public static Vector2 PlayerMovementDirection => JoyStickProcessor("movementJoystick");
+    public static Vector2 PlayerMovementDirection => JoyStickProcessor(JoyStickAction.Movement);
 
-    public static float Camera_X_Movement => JoyStickProcessor("cameraJoystick").x;
+    public static float Camera_X_Movement => JoyStickProcessor(JoyStickAction.CameraLook).x;
 
-    public static float Camera_Y_Movement => JoyStickProcessor("cameraJoystick").y;
+    public static float Camera_Y_Movement => JoyStickProcessor(JoyStickAction.CameraLook).y;
 
-    public static bool JumpInput => ButtonPressProcessor("Jump");
+    public static bool JumpInput => ButtonPressProcessor(ButtonAction.Jump);
 
-    public static bool ClickInput => ButtonPressProcessor("clickTrigger");
+    public static bool ClickInput => ButtonPressProcessor(ButtonAction.Action1);
 
-    public static bool AfterClickInput => ButtonPressProcessor("afterTrigger");
+    public static bool AfterClickInput => ButtonPressProcessor(ButtonAction.Action2);
 
-    public static bool HoldClickInput => ButtonPressProcessor("holdTrigger");
+    public static bool HoldClickInput => ButtonPressProcessor(ButtonAction.Action3);
 
-    public static bool TouchInput => ButtonPressProcessor("touchTrigger");
+    public static bool TouchInput => ButtonPressProcessor(ButtonAction.Action4);
     #endregion
 }

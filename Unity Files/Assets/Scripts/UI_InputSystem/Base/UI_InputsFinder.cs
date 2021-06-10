@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UI_Inputs.Enums;
 
 namespace UI_Inputs
 {
     public static class UI_InputsFinder
     {
-        public static Dictionary<string, UI_InputButton> GetButtonDictionary()
+        public static Dictionary<ButtonAction, UI_InputButton> GetButtonDictionary()
         {
-            Dictionary<string, UI_InputButton> newUI_Buttons;
+            Dictionary<ButtonAction, UI_InputButton> newUI_Buttons;
 
             UI_InputButton[] availableButtons = GetObjectsOfTypeUI_Button();
-            newUI_Buttons = new Dictionary<string, UI_InputButton>();
+            newUI_Buttons = new Dictionary<ButtonAction, UI_InputButton>();
 
             foreach (UI_InputButton button in availableButtons)
             {
@@ -21,12 +22,12 @@ namespace UI_Inputs
             return newUI_Buttons;
         }
 
-        public static Dictionary<string, UI_InputJoystick> GetJoystickDictionary()
+        public static Dictionary<JoyStickAction, UI_InputJoystick> GetJoystickDictionary()
         {
-            Dictionary<string, UI_InputJoystick> newUI_Joysticks;
+            Dictionary<JoyStickAction, UI_InputJoystick> newUI_Joysticks;
 
             UI_InputJoystick[] availableJoysticks = GetObjectsOfTypeUI_Joystick();
-            newUI_Joysticks = new Dictionary<string, UI_InputJoystick>();
+            newUI_Joysticks = new Dictionary<JoyStickAction, UI_InputJoystick>();
 
             foreach (UI_InputJoystick joystick in availableJoysticks)
             {

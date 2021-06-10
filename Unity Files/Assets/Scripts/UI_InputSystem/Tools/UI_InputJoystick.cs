@@ -1,13 +1,14 @@
 using UnityEngine;
+using UI_Inputs.Enums;
 
 namespace UI_Inputs
 {
     public class UI_InputJoystick : MonoBehaviour
     {
         [SerializeField]
-        private string _joyStickID = "movementJoystick";
+        private JoyStickAction _joystickAction = JoyStickAction.Movement;
 
-        public string idJoystick => _joyStickID;
+        public JoyStickAction idJoystick => _joystickAction;
 
         private Joystick thisJoystick;
 

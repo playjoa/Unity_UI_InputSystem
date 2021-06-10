@@ -1,20 +1,23 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UI_Inputs.Enums;
 
 namespace UI_Inputs
 {
     public class UI_InputButton : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
     {
+        [Header("---------Button Click Type---------")]
         [SerializeField]
-        private ButtonType thisButtonType = ButtonType.ClickTrigger;
+        private ButtonType buttonType = ButtonType.ClickTrigger;
 
+        [Header("---------Button Action-------------")]
         [SerializeField]
-        private string _buttonID = "Jump";
+        private ButtonAction _buttonAction = ButtonAction.Jump;
 
         public bool isPressing { get; private set; } = false;
 
-        public string idButton => _buttonID;
+        public ButtonAction idButton => _buttonAction;
 
         public void OnPointerClick(PointerEventData eventData)
         {
@@ -35,25 +38,25 @@ namespace UI_Inputs
 
         void ProcessIfTouchTrigger()
         {
-            if (thisButtonType == ButtonType.TouchTrigger)
-                StartCoroutine(MakeClick());
+            if (buttonType == ButtonType.TouchTrigger)
+                StartCoroutine(MakeAFrameClick());
         }
 
         void ProcessIfAfterClickTrigger()
         {
-            if (thisButtonType == ButtonType.AfterClickTrigger)
-                StartCoroutine(MakeClick());
+            if (buttonType == ButtonType.AfterClickTrigger)
+                StartCoroutine(MakeAFrameClick());
         }
 
         void ProcessIfClickTrigger()
         {
-            if (thisButtonType == ButtonType.ClickTrigger)
-                StartCoroutine(MakeClick());
+            if (buttonType == ButtonType.ClickTrigger)
+                StartCoroutine(MakeAFrameClick());
         }
 
         void ProcessIfHoldTrigger()
         {
-            if (thisButtonType == ButtonType.HoldTrigger)
+            if (buttonType == ButtonType.HoldTrigger)
                 isPressing = !isPressing;
         }
 
@@ -62,7 +65,7 @@ namespace UI_Inputs
             isPressing = false;
         }
 
-        IEnumerator MakeClick()
+        IEnumerator MakeAFrameClick()
         {
             isPressing = true;
             yield return new WaitForEndOfFrame();
