@@ -62,27 +62,26 @@ public static bool ButtonValue(ButtonAction buttonToCheck) => ButtonPressProcess
 * The class is static so no need to add to your scene and use Singleton.
 
 ```C#
-    //Jump Example
-    void ProcessJumping()
-    {
-        if (!canJump)
-            return;
+//Jump Example
+void ProcessJumping()
+{
+    if (!canJump)
+        return;
 
-        if (UI_InputSystem.ButtonValue(ButtonAction.Jump) && isGrounded)      
-            gravityVelocity.y = JumpForce();      
+    if (UI_InputSystem.ButtonValue(ButtonAction.Jump) && isGrounded)      
+        gravityVelocity.y = JumpForce();      
+}
+
+//Movement Example
+Vector3 PlayerMovementDirection()
+{
+    Vector3 baseDirection = playerTransform.right * UI_InputSystem.JoyStick_X_Value(JoyStickAction.Movement) +
+                            playerTransform.forward * UI_InputSystem.JoyStick_Y_Value(JoyStickAction.Movement);
+
+    baseDirection *= playerHorizontalSpeed * Time.deltaTime;
+    return baseDirection;
     }
-
-    //Movement Example
-    Vector3 PlayerMovementDirection()
-    {
-        Vector3 baseDirection = playerTransform.right * UI_InputSystem.JoyStick_X_Value(JoyStickAction.Movement) +
-                                playerTransform.forward * UI_InputSystem.JoyStick_Y_Value(JoyStickAction.Movement);
-
-        baseDirection *= playerHorizontalSpeed * Time.deltaTime;
-
-        return baseDirection;
-    }
-    }
+}
 ```
 <strong> Obs: </strong> This code is located in "PlayerMovement.cs"
 
