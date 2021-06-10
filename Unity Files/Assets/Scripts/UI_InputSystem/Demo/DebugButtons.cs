@@ -1,19 +1,20 @@
 using UnityEngine;
+using UI_Inputs.Enums;
 
 public class DebugButtons : MonoBehaviour
 {
     private void Update()
     {
-        if (UI_InputSystem.AfterClickInput)
-            DebugText("After click Input: TRIGGERED!");
-
-        if (UI_InputSystem.ClickInput)
+        if (UI_InputSystem.ButtonValue(ButtonAction.Action1))
             DebugText("Click Input: TRIGGERED!");
 
-        if (UI_InputSystem.HoldClickInput)
+        if (UI_InputSystem.ButtonValue(ButtonAction.Action2))
+            DebugText("After click Input: TRIGGERED!");
+
+        if (UI_InputSystem.ButtonValue(ButtonAction.Action3))
             DebugText("Holding Input: TRIGGERED!");
 
-        if (UI_InputSystem.TouchInput)
+        if (UI_InputSystem.ButtonValue(ButtonAction.Action4))
             DebugText("Touch Input: TRIGGERED!");
     }
 

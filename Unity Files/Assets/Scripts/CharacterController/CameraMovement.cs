@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UI_Inputs.Enums;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -46,12 +47,12 @@ public class CameraMovement : MonoBehaviour
 
     float X_ValueWithSens() 
     {
-        return UI_InputSystem.Camera_X_Movement * Time.deltaTime * mouseSensX;
+        return UI_InputSystem.JoyStick_X_Value(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensX;
     }
 
     float Y_ValueWithSens()
     {
-        return UI_InputSystem.Camera_Y_Movement * Time.deltaTime * mouseSensY;
+        return UI_InputSystem.JoyStick_Y_Value(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensY;
     }
 
     float RotationClamped(float refRotation) 

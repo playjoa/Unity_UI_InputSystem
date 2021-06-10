@@ -46,41 +46,42 @@ namespace UI_Inputs.Enums
 
 ![1](Screenshots/SetUpJoystick.png)
 
-
 ## 4. Create your inputs
-* Add your commands along with the Actions in "UI_InputSystem.cs" (bool and Vector2 ready)
+* These are the default functions to call in your script (bool and Vector2 ready)
+* If you want to add other type of functions add them to UI_InputSystem
 
 ```C#
-public static Vector2 PlayerMovementDirection => JoyStickProcessor(JoyStickAction.Movement);
-
-public static float Camera_X_Movement => JoyStickProcessor(JoyStickAction.CameraLook).x;
-
-public static float Camera_Y_Movement => JoyStickProcessor(JoyStickAction.CameraLook).y;
-
-public static bool JumpInput => ButtonPressProcessor(ButtonAction.Jump);
-
-public static bool ClickInput => ButtonPressProcessor(ButtonAction.Action1);
-
-public static bool AfterClickInput => ButtonPressProcessor(ButtonAction.Action2);
-
-public static bool HoldClickInput => ButtonPressProcessor(ButtonAction.Action3);
-
-public static bool TouchInput => ButtonPressProcessor(ButtonAction.Action4);
+public static Vector2 JoystickValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
+public static float JoyStick_X_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
+public static float JoyStick_Y_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
+public static bool ButtonValue(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
 ```
 
 ## 5. Using inputs
-* Call "UI_InputSystem" on your desired controllers and done!
+* Call "UI_InputSystem" on your desired controllers, add the desired command wanted and done!
 * The class is static so no need to add to your scene and use Singleton
 
 ```C#
+    //Jump Example
+    void ProcessJumping()
+    {
+        if (!canJump)
+            return;
+
+        if (UI_InputSystem.ButtonValue(ButtonAction.Jump) && isGrounded)      
+            gravityVelocity.y = JumpForce();      
+    }
+
+    //Movement Example
     Vector3 PlayerMovementDirection()
     {
-        Vector3 baseDirection = playerTransform.right * UI_InputSystem.PlayerMovementDirection.x +
-                                playerTransform.forward * UI_InputSystem.PlayerMovementDirection.y;
+        Vector3 baseDirection = playerTransform.right * UI_InputSystem.JoyStick_X_Value(JoyStickAction.Movement) +
+                                playerTransform.forward * UI_InputSystem.JoyStick_Y_Value(JoyStickAction.Movement);
 
         baseDirection *= playerHorizontalSpeed * Time.deltaTime;
 
         return baseDirection;
+    }
     }
 ```
 <strong> Obs: </strong> This code is located in "PlayerMovement.cs"

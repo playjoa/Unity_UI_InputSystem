@@ -53,20 +53,9 @@ public static class UI_InputSystem
         return Vector2.zero;
     }
 
-    public static Vector2 PlayerMovementDirection => JoyStickProcessor(JoyStickAction.Movement);
-
-    public static float Camera_X_Movement => JoyStickProcessor(JoyStickAction.CameraLook).x;
-
-    public static float Camera_Y_Movement => JoyStickProcessor(JoyStickAction.CameraLook).y;
-
-    public static bool JumpInput => ButtonPressProcessor(ButtonAction.Jump);
-
-    public static bool ClickInput => ButtonPressProcessor(ButtonAction.Action1);
-
-    public static bool AfterClickInput => ButtonPressProcessor(ButtonAction.Action2);
-
-    public static bool HoldClickInput => ButtonPressProcessor(ButtonAction.Action3);
-
-    public static bool TouchInput => ButtonPressProcessor(ButtonAction.Action4);
+    public static Vector2 JoystickValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
+    public static float JoyStick_X_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
+    public static float JoyStick_Y_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
+    public static bool ButtonValue(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
     #endregion
 }
