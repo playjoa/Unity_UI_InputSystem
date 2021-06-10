@@ -41,14 +41,14 @@ namespace UI_Inputs.Enums
 <strong> Obs: </strong> Compatible with: "Click Trigger", "Touch Trigger", "Hold Trigger" and "After Click Trigger"
 
 ## 3. Joystick setup
-* Assign "UI_InputJoystick.cs" to a Joystick from the asset pack (can be any type of joystick [Fixed, Floating etc...]) <br>
+* Assign "UI_InputJoystick.cs" to a Joystick from the asset pack (can be any type of joystick [Fixed, Floating etc...]). <br>
 * Choose the desired Joystick Action for the Joystick created from the InputEnums! Example: joystickCamera, joystickPlayerMovement... <br>
 
 ![1](Screenshots/SetUpJoystick.png)
 
 ## 4. Create your inputs
-* These are the default functions to call in your script (bool and Vector2 ready)
-* If you want to add other type of functions add them to UI_InputSystem
+* These are the default functions to call in your script (bool, float and Vector2 ready).
+* If you want to add other type of functions add them to UI_InputSystem.
 
 ```C#
 public static Vector2 JoystickValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
@@ -59,7 +59,7 @@ public static bool ButtonValue(ButtonAction buttonToCheck) => ButtonPressProcess
 
 ## 5. Using inputs
 * Call "UI_InputSystem" on your desired controllers, add the desired command wanted and done!
-* The class is static so no need to add to your scene and use Singleton
+* The class is static so no need to add to your scene and use Singleton.
 
 ```C#
     //Jump Example
