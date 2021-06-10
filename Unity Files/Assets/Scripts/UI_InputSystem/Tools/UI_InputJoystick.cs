@@ -5,7 +5,7 @@ namespace UI_Inputs
 {
     public class UI_InputJoystick : MonoBehaviour
     {
-        [Header("---------Joystick Action---------")]
+        [Header("---------Joystick Action-----------")]
         [SerializeField]
         private JoyStickAction _joystickAction = JoyStickAction.Movement;
 
