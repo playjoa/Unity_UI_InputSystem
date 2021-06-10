@@ -60,7 +60,7 @@ public static bool ButtonValue(ButtonAction buttonToCheck) => ButtonPressProcess
 ## 5. Using inputs
 * Call "UI_InputSystem" on your desired controllers, add the desired command wanted and done!
 * The class is static so no need to add to your scene and use Singleton.
-* Remeber to add UI_Inputs.Enums namespace in your script to use ButtonAction and JoyStickAction.
+* Remeber to add UI_Inputs.Enums namespace in your script to use ButtonAction and JoyStickAction Enums.
 
 ```C#
 using UI_Inputs.Enums;
