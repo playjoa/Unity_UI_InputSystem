@@ -10,7 +10,7 @@ Uses the FREE asset <a href='https://assetstore.unity.com/packages/tools/input-m
 
 # SetUp
 
-## 1. Create You Actions
+## 1. Create your actions
 * Add your desired actions in InputEnums.cs
 
 ```C#
@@ -68,7 +68,7 @@ public static bool HoldClickInput => ButtonPressProcessor(ButtonAction.Action3);
 public static bool TouchInput => ButtonPressProcessor(ButtonAction.Action4);
 ```
 
-## 5. Using Inputs
+## 5. Using inputs
 * Call "UI_InputSystem" on your desired controllers and done!
 * The class is static so no need to add to your scene and use Singleton
 
