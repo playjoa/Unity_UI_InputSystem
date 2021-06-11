@@ -51,10 +51,10 @@ namespace UI_Inputs.Enums
 * If you want to add other type of functions add them to UI_InputSystem.
 
 ```C#
-public static Vector2 JoystickValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
-public static float JoyStick_X_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
-public static float JoyStick_Y_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
-public static bool ButtonValue(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
+public static Vector2 AxisValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
+public static float Axis_X_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
+public static float Axis_Y_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
+public static bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
 ```
 
 ## 5. Using inputs
@@ -71,15 +71,15 @@ void ProcessJumping()
     if (!canJump)
         return;
 
-    if (UI_InputSystem.ButtonValue(ButtonAction.Jump) && isGrounded)      
+    if (UI_InputSystem.GetButton(ButtonAction.Jump) && isGrounded)      
         gravityVelocity.y = JumpForce();      
 }
 
 //Movement Example
 Vector3 PlayerMovementDirection()
 {
-    Vector3 baseDirection = playerTransform.right * UI_InputSystem.JoyStick_X_Value(JoyStickAction.Movement) +
-                            playerTransform.forward * UI_InputSystem.JoyStick_Y_Value(JoyStickAction.Movement);
+    Vector3 baseDirection = playerTransform.right * UI_InputSystem.Axis_X_Value(JoyStickAction.Movement) +
+                            playerTransform.forward * UI_InputSystem.Axis_Y_Value(JoyStickAction.Movement);
 
     baseDirection *= playerHorizontalSpeed * Time.deltaTime;
     return baseDirection;
