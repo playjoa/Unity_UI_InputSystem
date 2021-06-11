@@ -97,8 +97,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 PlayerMovementDirection()
     {
-        Vector3 baseDirection = playerTransform.right * UI_InputSystem.Axis_X_Value(JoyStickAction.Movement) +
-                                playerTransform.forward * UI_InputSystem.Axis_Y_Value(JoyStickAction.Movement);
+        Vector3 baseDirection = playerTransform.right * UI_InputSystem.GetAxisHorizontal(JoyStickAction.Movement) +
+                                playerTransform.forward * UI_InputSystem.GetAxisVertical(JoyStickAction.Movement);
 
         baseDirection *= playerHorizontalSpeed * Time.deltaTime;
 

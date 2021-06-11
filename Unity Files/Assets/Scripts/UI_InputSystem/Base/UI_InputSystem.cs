@@ -53,9 +53,9 @@ public static class UI_InputSystem
         return Vector2.zero;
     }
 
-    public static Vector2 AxisValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
-    public static float Axis_X_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
-    public static float Axis_Y_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
+    public static Vector2 GetAxisValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
+    public static float GetAxisHorizontal(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
+    public static float GetAxisVertical(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
     public static bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
     #endregion
 }
