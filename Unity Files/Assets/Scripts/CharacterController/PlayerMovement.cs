@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if (!canJump)
             return;
 
-        if (UI_InputSystem.ButtonValue(ButtonAction.Jump) && isGrounded)      
+        if (UI_InputSystem.GetButton(ButtonAction.Jump) && isGrounded)      
             gravityVelocity.y = JumpForce();      
     }
 
@@ -97,8 +97,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 PlayerMovementDirection()
     {
-        Vector3 baseDirection = playerTransform.right * UI_InputSystem.JoyStick_X_Value(JoyStickAction.Movement) +
-                                playerTransform.forward * UI_InputSystem.JoyStick_Y_Value(JoyStickAction.Movement);
+        Vector3 baseDirection = playerTransform.right * UI_InputSystem.Axis_X_Value(JoyStickAction.Movement) +
+                                playerTransform.forward * UI_InputSystem.Axis_Y_Value(JoyStickAction.Movement);
 
         baseDirection *= playerHorizontalSpeed * Time.deltaTime;
 

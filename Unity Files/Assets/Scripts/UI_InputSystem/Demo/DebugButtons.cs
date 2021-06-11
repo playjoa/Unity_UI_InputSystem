@@ -5,16 +5,16 @@ public class DebugButtons : MonoBehaviour
 {
     private void Update()
     {
-        if (UI_InputSystem.ButtonValue(ButtonAction.Action1))
+        if (UI_InputSystem.GetButton(ButtonAction.Action1))
             DebugText("Click Input: TRIGGERED!");
 
-        if (UI_InputSystem.ButtonValue(ButtonAction.Action2))
+        if (UI_InputSystem.GetButton(ButtonAction.Action2))
             DebugText("After click Input: TRIGGERED!");
 
-        if (UI_InputSystem.ButtonValue(ButtonAction.Action3))
+        if (UI_InputSystem.GetButton(ButtonAction.Action3))
             DebugText("Holding Input: TRIGGERED!");
 
-        if (UI_InputSystem.ButtonValue(ButtonAction.Action4))
+        if (UI_InputSystem.GetButton(ButtonAction.Action4))
             DebugText("Touch Input: TRIGGERED!");
     }
 
