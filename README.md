@@ -51,9 +51,9 @@ namespace UI_Inputs.Enums
 * If you want to add other type of functions add them to UI_InputSystem.
 
 ```C#
-public static Vector2 AxisValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
-public static float Axis_X_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
-public static float Axis_Y_Value(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
+public static Vector2 GetAxisValue(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
+public static float GetAxisHorizontal(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
+public static float GetAxisVertical(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
 public static bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
 ```
 
@@ -78,8 +78,8 @@ void ProcessJumping()
 //Movement Example
 Vector3 PlayerMovementDirection()
 {
-    Vector3 baseDirection = playerTransform.right * UI_InputSystem.Axis_X_Value(JoyStickAction.Movement) +
-                            playerTransform.forward * UI_InputSystem.Axis_Y_Value(JoyStickAction.Movement);
+    Vector3 baseDirection = playerTransform.right * UI_InputSystem.GetAxisHorizontal(JoyStickAction.Movement) +
+                            playerTransform.forward * UI_InputSystem.GetAxisVertical(JoyStickAction.Movement);
 
     baseDirection *= playerHorizontalSpeed * Time.deltaTime;
     return baseDirection;
