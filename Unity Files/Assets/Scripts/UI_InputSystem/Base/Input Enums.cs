@@ -1,12 +1,11 @@
-namespace UI_Inputs.Enums
+namespace UI_InputSystem.Base
 {
     public enum ButtonAction 
     {
         Jump,
-        Action1,
-        Action2, 
-        Action3,
-        Action4
+        ClickTrigger,
+        HoldTrigger, 
+        TouchTrigger
     }
 
     public enum JoyStickAction

@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UI_Inputs.Enums;
+﻿using UI_InputSystem.Base;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -33,75 +33,61 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float jumpHeight = 2;
 
+    private float JumpForce => Mathf.Sqrt(jumpHeight * -2f * gravityValue);
     private Vector3 gravityVelocity;
-    private bool isGrounded;
+    
+    public bool Grounded => Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
 
-    private void Update()
+    private void FixedUpdate()
     {
         MovePlayer();
         CalculateGravity();
         ProcessJumping();
     }
-    void MovePlayer()
+    
+    private void MovePlayer()
     {
-        if (playerTransform == null)
-            return;
-
+        if (!playerTransform) return;
+        
         controllerPlayer.Move(PlayerMovementDirection());
     }
 
-    void CalculateGravity() 
+    private void CalculateGravity() 
     {
-        if (!useGravity)
-            return;
+        if (!useGravity) return;
+        if (!groundChecker) return;
 
-        if (groundChecker == null)
-            return;
-
-        isGrounded = CheckIfGrounded();
-
-        ResetingGravityIfGrounded();
+        ResetGravityIfGrounded();
         ApplyGravity();
     }
 
-    void ProcessJumping()
+    private void ProcessJumping()
     {
         if (!canJump)
             return;
 
-        if (UI_InputSystem.GetButton(ButtonAction.Jump) && isGrounded)      
-            gravityVelocity.y = JumpForce();      
+        if (UIInputSystem.GetButton(ButtonAction.Jump) && Grounded)      
+            gravityVelocity.y = JumpForce;      
     }
 
-    float JumpForce()
-    {
-        return Mathf.Sqrt(jumpHeight * -2f * gravityValue);
-    }
-
-    void ApplyGravity()
+    private void ApplyGravity()
     {
         gravityVelocity.y += gravityValue * Time.deltaTime;
         controllerPlayer.Move(gravityVelocity * Time.deltaTime);
     }
 
-    void ResetingGravityIfGrounded()
+    private void ResetGravityIfGrounded()
     {
-        if (isGrounded && gravityVelocity.y < 0)
+        if (Grounded && gravityVelocity.y < 0)
             gravityVelocity.y = -1.5f;
     }
-
-    bool CheckIfGrounded()
+    
+    private Vector3 PlayerMovementDirection()
     {
-        return Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
-    }
-
-    Vector3 PlayerMovementDirection()
-    {
-        Vector3 baseDirection = playerTransform.right * UI_InputSystem.GetAxisHorizontal(JoyStickAction.Movement) +
-                                playerTransform.forward * UI_InputSystem.GetAxisVertical(JoyStickAction.Movement);
+        var baseDirection = playerTransform.right * UIInputSystem.GetAxisHorizontal(JoyStickAction.Movement) +
+                                playerTransform.forward * UIInputSystem.GetAxisVertical(JoyStickAction.Movement);
 
         baseDirection *= playerHorizontalSpeed * Time.deltaTime;
-
         return baseDirection;
     }
 }

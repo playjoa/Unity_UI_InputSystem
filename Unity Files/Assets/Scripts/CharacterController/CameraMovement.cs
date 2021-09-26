@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UI_Inputs.Enums;
+﻿using UI_InputSystem.Base;
+using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -14,49 +14,32 @@ public class CameraMovement : MonoBehaviour
     private float minClampVertical = -60, maxClampHorizontal = 90;
 
     private float verticalRotation = 0;
-
-    private void Update()
+    private float XValueWithSens => UIInputSystem.GetAxisHorizontal(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensX;
+    private float YValueWithSens => UIInputSystem.GetAxisVertical(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensY;
+    private float RotationClamped(float refRotation) => Mathf.Clamp(refRotation, minClampVertical, maxClampHorizontal);
+    
+    private void FixedUpdate()
     {
         CameraHorizontalMovement();
         CameraVerticalMovement();
     }
 
-    void CameraVerticalMovement()
+    private void CameraVerticalMovement()
     {
-        if (cameraTranform == null)
-            return;
-
-        verticalRotation -= Y_ValueWithSens();
+        if (!cameraTranform) return;
+        
+        verticalRotation -= YValueWithSens;
         verticalRotation = RotationClamped(verticalRotation);
 
         cameraTranform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
     }
 
-    void CameraHorizontalMovement()
+    private void CameraHorizontalMovement()
     {
-        if (playerTransform == null)
-            return;
+        if (playerTransform == null) return;
 
-        playerTransform.Rotate(Vector3.up * X_ValueWithSens());
+        playerTransform.Rotate(Vector3.up * XValueWithSens);
     }
 
-    public void OverrideLookAt(Transform targetToLook)
-    {
-        cameraTranform.LookAt(targetToLook);
-    }
-
-    float X_ValueWithSens() 
-    {
-        return UI_InputSystem.GetAxisHorizontal(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensX;
-    }
-
-    float Y_ValueWithSens()
-    {
-        return UI_InputSystem.GetAxisVertical(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensY;
-    }
-
-    float RotationClamped(float refRotation) 
-    {
-        return Mathf.Clamp(refRotation, minClampVertical, maxClampHorizontal);
-    }
+    public void OverrideLookAt(Transform targetToLook) => cameraTranform.LookAt(targetToLook);
 }

@@ -1,24 +1,21 @@
+using UI_InputSystem.Base;
 using UnityEngine;
-using UI_Inputs.Enums;
 
 public class DebugButtons : MonoBehaviour
 {
     private void Update()
     {
-        if (UI_InputSystem.GetButton(ButtonAction.Action1))
+        if (UIInputSystem.GetButton(ButtonAction.ClickTrigger))
             DebugText("Click Input: TRIGGERED!");
 
-        if (UI_InputSystem.GetButton(ButtonAction.Action2))
-            DebugText("After click Input: TRIGGERED!");
-
-        if (UI_InputSystem.GetButton(ButtonAction.Action3))
+        if (UIInputSystem.GetButton(ButtonAction.HoldTrigger))
             DebugText("Holding Input: TRIGGERED!");
 
-        if (UI_InputSystem.GetButton(ButtonAction.Action4))
+        if (UIInputSystem.GetButton(ButtonAction.TouchTrigger))
             DebugText("Touch Input: TRIGGERED!");
     }
 
-    void DebugText(string textToDebug)
+    private void DebugText(string textToDebug)
     {
         Debug.Log(textToDebug);
     }
