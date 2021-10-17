@@ -59,19 +59,29 @@ public static bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor
 
 ## 5. Using inputs
 * Call "UI_InputSystem" on your desired controllers, add the desired command wanted and done!
-* The class is static so no need to add to your scene and use Singleton.
+* You can also subscribe to OnClick and OnTouch events for your actions.
 * Remeber to add UI_Inputs.Enums namespace in your script to use ButtonAction and JoyStickAction Enums.
 
 ```C#
 using UI_Inputs.Enums;
 
 //Jump Example
+
+private void OnEnable()
+{
+    UIInputSystem.ME.AddOnTouchEvent(ButtonAction.Jump, ProcessJumping);
+}
+
+private void OnDisable()
+{
+    UIInputSystem.ME.RemoveOnTouchEvent(ButtonAction.Jump, ProcessJumping);
+}
+
 void ProcessJumping()
 {
-    if (!canJump)
-        return;
+    if (!canJump) return;
 
-    if (UI_InputSystem.GetButton(ButtonAction.Jump) && isGrounded)      
+    if (isGrounded)      
         gravityVelocity.y = JumpForce();      
 }
 
