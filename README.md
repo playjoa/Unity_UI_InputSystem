@@ -88,8 +88,8 @@ void ProcessJumping()
 //Movement Example
 Vector3 PlayerMovementDirection()
 {
-    Vector3 baseDirection = playerTransform.right * UI_InputSystem.GetAxisHorizontal(JoyStickAction.Movement) +
-                            playerTransform.forward * UI_InputSystem.GetAxisVertical(JoyStickAction.Movement);
+    Vector3 baseDirection = playerTransform.right * UI_InputSystem.ME.GetAxisHorizontal(JoyStickAction.Movement) +
+                            playerTransform.forward * UI_InputSystem.ME.GetAxisVertical(JoyStickAction.Movement);
 
     baseDirection *= playerHorizontalSpeed * Time.deltaTime;
     return baseDirection;
