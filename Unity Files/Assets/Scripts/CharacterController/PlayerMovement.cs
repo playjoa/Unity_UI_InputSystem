@@ -72,8 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessJumping()
     {
-        if (!allowedJumping)
-            return;
+        if (!allowedJumping) return;
 
         if (Grounded)      
             gravityVelocity.y = JumpForce;      
