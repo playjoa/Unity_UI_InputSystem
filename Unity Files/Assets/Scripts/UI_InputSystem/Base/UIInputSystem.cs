@@ -1,57 +1,71 @@
+using System;
 using System.Collections.Generic;
 using UI_Inputs;
 using UnityEngine;
 
 namespace UI_InputSystem.Base
 {
-    public static class UIInputSystem
+    public class UIInputSystem : MonoBehaviour
     {
-        private static Dictionary<ButtonAction, UIInputButton> _uiButtonInputs;
-        private static Dictionary<JoyStickAction, UIInputJoystick> _uiJoySticks;
+        public static UIInputSystem ME { get; private set; }
 
+        private Dictionary<ButtonAction, UIInputButton> uiButtonInputs;
+        private Dictionary<JoyStickAction, UIInputJoystick> uiJoySticks;
+        
         #region Initialize Area
-        private static void PrepareValues()
+
+        private void Awake()
         {
+            PrepareValues();
+        }
+
+        private void PrepareValues()
+        {
+            ME = this;
+            
             CreateButtonDictionary();
             CreateJoystickDictionary();
         }
 
-        private static void CreateButtonDictionary()
+        private void CreateButtonDictionary()
         {
-            if (_uiButtonInputs != null)
+            if (uiButtonInputs != null)
                 return;
 
-            _uiButtonInputs = UIInputsFinder.GetAvailableInputs<ButtonAction, UIInputButton>();
+            uiButtonInputs = UIInputsFinder.GetAvailableInputs<ButtonAction, UIInputButton, bool>();
         }
 
-        private static void CreateJoystickDictionary()
+        private void CreateJoystickDictionary()
         {
-            if (_uiJoySticks != null)
+            if (uiJoySticks != null)
                 return;
 
-            _uiJoySticks = UIInputsFinder.GetAvailableInputs<JoyStickAction, UIInputJoystick>();
+            uiJoySticks = UIInputsFinder.GetAvailableInputs<JoyStickAction, UIInputJoystick, Vector2>();
         }
         #endregion
 
         #region Inputs Area
-        private static bool ButtonPressProcessor(ButtonAction buttonToCheckPress)
+        private bool ButtonPressProcessor(ButtonAction buttonToCheckPress)
         {
-            PrepareValues();
-
-            return _uiButtonInputs.ContainsKey(buttonToCheckPress) && _uiButtonInputs[buttonToCheckPress].IsPressing;
+            return uiButtonInputs.ContainsKey(buttonToCheckPress) && uiButtonInputs[buttonToCheckPress].InputValue;
         }
 
-        private static Vector2 JoyStickProcessor(JoyStickAction joyStickToCheckPress)
+        private Vector2 JoyStickProcessor(JoyStickAction joyStickToCheckPress)
         {
-            PrepareValues();
-
-            return _uiJoySticks.ContainsKey(joyStickToCheckPress) ? _uiJoySticks[joyStickToCheckPress].JoystickDirection() : Vector2.zero;
+            return uiJoySticks.ContainsKey(joyStickToCheckPress) ? uiJoySticks[joyStickToCheckPress].InputValue : Vector2.zero;
         }
 
-        public static Vector2 GetAxis(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
-        public static float GetAxisHorizontal(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
-        public static float GetAxisVertical(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
-        public static bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
+        public Vector2 GetAxis(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek);
+        public float GetAxisHorizontal(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).x;
+        public float GetAxisVertical(JoyStickAction joystickToChek) => JoyStickProcessor(joystickToChek).y;
+        public bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor(buttonToCheck);
+        #endregion
+        
+        #region Events Area
+        public void AddOnClickEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnClick += @event;
+        public void AddOnTouchEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnTouch += @event;
+        public void RemoveOnClickEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnClick -= @event;
+        public void RemoveOnTouchEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnTouch -= @event;
         #endregion
     }
 }

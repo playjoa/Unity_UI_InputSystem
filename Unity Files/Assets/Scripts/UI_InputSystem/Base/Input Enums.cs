@@ -5,7 +5,9 @@ namespace UI_InputSystem.Base
         Jump,
         ClickTrigger,
         HoldTrigger, 
-        TouchTrigger
+        TouchTrigger,
+        OnClickEventTrigger,
+        OnTouchEventTrigger
     }
 
     public enum JoyStickAction

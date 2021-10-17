@@ -4,13 +4,16 @@ using UI_InputSystem.Base;
 
 namespace UI_Inputs
 {
-    public class UIInputJoystick : UIInput<JoyStickAction>
+    public class UIInputJoystick : UIInput<JoyStickAction, Vector2>
     {
         [Header("---------Joystick Action-----------")]
         [SerializeField]
         private JoyStickAction joystickAction = JoyStickAction.Movement;
-
+        
         public override JoyStickAction InputID => joystickAction;
+        public override Vector2 InputValue => JoystickDirection();
+        public override Vector2 InputDefaultValue => Vector2.zero;
+
         private Joystick joystick;
 
         private void Awake()
@@ -25,8 +28,8 @@ namespace UI_Inputs
             if (joystick == null)
                 Debug.LogError($"Couldn't find a joystick in: {gameObject.name}");
         }
-
-        public Vector2 JoystickDirection()
+        
+        private Vector2 JoystickDirection()
         {
             return joystick == null ? Vector2.zero : joystick.Direction;
         }

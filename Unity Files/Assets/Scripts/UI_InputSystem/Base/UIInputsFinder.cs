@@ -6,7 +6,7 @@ namespace UI_InputSystem.Base
 {
     public static class UIInputsFinder
     {
-        public static Dictionary<TInputAction, TInputType> GetAvailableInputs<TInputAction, TInputType>() where TInputType : UIInput<TInputAction>
+        public static Dictionary<TInputAction, TInputType> GetAvailableInputs<TInputAction, TInputType, TInputValue>() where TInputType : UIInput<TInputAction, TInputValue>
         {
             var newInputs = new Dictionary<TInputAction, TInputType>();
             var availableInputsOfThisType = GetObjectsOfType<TInputType>();

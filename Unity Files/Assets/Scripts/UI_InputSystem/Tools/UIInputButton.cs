@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,18 +7,23 @@ using UI_InputSystem.Base;
 
 namespace UI_Inputs
 {
-    public class UIInputButton : UIInput<ButtonAction>, IPointerDownHandler, IPointerUpHandler
+    public class UIInputButton : UIInput<ButtonAction, bool>, IPointerDownHandler, IPointerUpHandler
     {
-        [Header("---------Button Type---------")]
+        [Header("---------Button Type---------------")]
         [SerializeField]
         private ButtonType buttonType = ButtonType.Click;
 
         [Header("---------Button Action-------------")]
         [SerializeField]
         private ButtonAction buttonAction = ButtonAction.Jump;
-
-        public bool IsPressing { get; private set; } = false;
+        
+        public override bool InputDefaultValue => false;
+        public override bool InputValue => isPressing;
         public override ButtonAction InputID => buttonAction;
+        public event Action OnClick;
+        public event Action OnTouch;
+
+        private bool isPressing;
 
         private enum ButtonType
         {
@@ -29,11 +35,13 @@ namespace UI_Inputs
         public void OnPointerDown(PointerEventData eventData)
         {
             ProcessClick();
+            OnTouch?.Invoke();
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             ProcessClick(false);
+            OnClick?.Invoke();
         }
 
         private void ProcessClick(bool pressing = true)
@@ -44,24 +52,24 @@ namespace UI_Inputs
                     StartCoroutine(MakeAFrameClick());
                     break;
                 case ButtonType.Hold:
-                    IsPressing = !IsPressing;
+                    isPressing = !isPressing;
                     break;
                 case ButtonType.Click when !pressing:
                     StartCoroutine(MakeAFrameClick());
                     break;
             }
         }
+        
+        private IEnumerator MakeAFrameClick()
+        {
+            isPressing = true;
+            yield return new WaitForFixedUpdate();
+            isPressing = false;
+        }
 
         private void OnDisable()
         {
-            IsPressing = false;
-        }
-
-        private IEnumerator MakeAFrameClick()
-        {
-            IsPressing = true;
-            yield return new WaitForFixedUpdate();
-            IsPressing = false;
+            isPressing = false;
         }
     }
 }

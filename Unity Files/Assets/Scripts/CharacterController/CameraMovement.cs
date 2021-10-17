@@ -14,8 +14,8 @@ public class CameraMovement : MonoBehaviour
     private float minClampVertical = -60, maxClampHorizontal = 90;
 
     private float verticalRotation = 0;
-    private float XValueWithSens => UIInputSystem.GetAxisHorizontal(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensX;
-    private float YValueWithSens => UIInputSystem.GetAxisVertical(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensY;
+    private float XValueWithSens => UIInputSystem.ME.GetAxisHorizontal(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensX;
+    private float YValueWithSens => UIInputSystem.ME.GetAxisVertical(JoyStickAction.CameraLook) * Time.deltaTime * mouseSensY;
     private float RotationClamped(float refRotation) => Mathf.Clamp(refRotation, minClampVertical, maxClampHorizontal);
     
     private void FixedUpdate()

@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask groundMask;
 
     [SerializeField]
-    private bool canJump = true;
+    private bool allowedJumping = true;
 
     [SerializeField]
     private float jumpHeight = 2;
@@ -38,11 +38,20 @@ public class PlayerMovement : MonoBehaviour
     
     public bool Grounded => Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
 
+    private void OnEnable()
+    {
+        UIInputSystem.ME.AddOnTouchEvent(ButtonAction.Jump, ProcessJumping);
+    }
+
+    private void OnDisable()
+    {
+        UIInputSystem.ME.RemoveOnTouchEvent(ButtonAction.Jump, ProcessJumping);
+    }
+    
     private void FixedUpdate()
     {
         MovePlayer();
         CalculateGravity();
-        ProcessJumping();
     }
     
     private void MovePlayer()
@@ -63,10 +72,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessJumping()
     {
-        if (!canJump)
+        if (!allowedJumping)
             return;
 
-        if (UIInputSystem.GetButton(ButtonAction.Jump) && Grounded)      
+        if (Grounded)      
             gravityVelocity.y = JumpForce;      
     }
 
@@ -84,8 +93,8 @@ public class PlayerMovement : MonoBehaviour
     
     private Vector3 PlayerMovementDirection()
     {
-        var baseDirection = playerTransform.right * UIInputSystem.GetAxisHorizontal(JoyStickAction.Movement) +
-                                playerTransform.forward * UIInputSystem.GetAxisVertical(JoyStickAction.Movement);
+        var baseDirection = playerTransform.right * UIInputSystem.ME.GetAxisHorizontal(JoyStickAction.Movement) +
+                            playerTransform.forward * UIInputSystem.ME.GetAxisVertical(JoyStickAction.Movement);
 
         baseDirection *= playerHorizontalSpeed * Time.deltaTime;
         return baseDirection;
