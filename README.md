@@ -66,7 +66,6 @@ public static bool GetButton(ButtonAction buttonToCheck) => ButtonPressProcessor
 using UI_Inputs.Enums;
 
 //Jump Example
-
 private void OnEnable()
 {
     UIInputSystem.ME.AddOnTouchEvent(ButtonAction.Jump, ProcessJumping);
