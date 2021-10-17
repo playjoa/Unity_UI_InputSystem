@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UI_Inputs;
+using UI_InputSystem.Enums;
 using UnityEngine;
 
 namespace UI_InputSystem.Base
@@ -62,10 +64,30 @@ namespace UI_InputSystem.Base
         #endregion
         
         #region Events Area
-        public void AddOnClickEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnClick += @event;
-        public void AddOnTouchEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnTouch += @event;
-        public void RemoveOnClickEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnClick -= @event;
-        public void RemoveOnTouchEvent(ButtonAction action, Action @event) => uiButtonInputs[action].OnTouch -= @event;
+        public void AddOnClickEvent(ButtonAction action, Action @event)
+        {
+            if(!uiButtonInputs.ContainsKey(action)) return;
+            uiButtonInputs[action].OnClick += @event;
+        }
+
+        public void AddOnTouchEvent(ButtonAction action, Action @event)
+        {
+            if (!uiButtonInputs.ContainsKey(action)) return;
+            uiButtonInputs[action].OnTouch += @event;
+        }
+
+        public void RemoveOnClickEvent(ButtonAction action, Action @event)
+        {
+            if (!uiButtonInputs.ContainsKey(action)) return;
+            uiButtonInputs[action].OnClick -= @event;
+        }
+
+        public void RemoveOnTouchEvent(ButtonAction action, Action @event)
+        {
+            if (!uiButtonInputs.ContainsKey(action)) return;
+            uiButtonInputs[action].OnTouch -= @event;
+        }
+
         #endregion
     }
 }
